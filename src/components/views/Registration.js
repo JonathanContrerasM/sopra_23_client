@@ -3,7 +3,7 @@ import {api, handleError} from 'helpers/api';
 import User from 'models/User';
 import {useHistory} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
-import 'styles/views/Login.scss';
+import 'styles/views/Registration.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 
@@ -35,15 +35,17 @@ FormField.propTypes = {
   onChange: PropTypes.func
 };
 
-const Login = props => {
+const Registration = props => {
   const history = useHistory();
-  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState(null);
   const [username, setUsername] = useState(null);
+  const [password, setPassword] = useState(null);
 
-  const doLogin = async () => {
+
+  const doRegistration = async () => {
     try {
-      const requestBody = JSON.stringify({username, password});
-      const response = await api.post('/login', requestBody);
+      const requestBody = JSON.stringify({username, password, email});
+      const response = await api.post('/registration', requestBody);
 
       // Get the returned user and update a new object.
       const user = new User(response.data);
@@ -60,8 +62,8 @@ const Login = props => {
 
   return (
     <BaseContainer>
-      <div className="login container">
-        <div className="login form">
+      <div className="registration container">
+        <div className="registration form">
           <FormField
             label="Username"
             value={username}
@@ -72,23 +74,28 @@ const Login = props => {
             value={password}
             onChange={n => setPassword(n)}
           />
+           <FormField
+             label="Email"
+             value={email}
+             onChange={n => setEmail(n)}
+           />
           <div className="login button-container">
             <Button
-              disabled={!username || !password}
+              disabled={!username || !password || !email}
               width="100%"
-              onClick={() => doLogin()}
+              onClick={() => doRegistration()}
             >
-              Login
+              Registration
             </Button>
           </div>
           <div className="login button-container">
-            <Button
-              width="50%"
-              onClick={() => history.push(`/Registration`)}
-            >
-              Register now
-            </Button>
-          </div>
+                      <Button
+                        width="50%"
+                        onClick={() => history.push(`/login`)}
+                      >
+                        Already Registered?
+                      </Button>
+                    </div>
         </div>
       </div>
     </BaseContainer>
@@ -99,4 +106,4 @@ const Login = props => {
  * You can get access to the history object's properties via the withRouter.
  * withRouter will pass updated match, location, and history props to the wrapped component whenever it renders.
  */
-export default Login;
+export default Registration;
