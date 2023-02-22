@@ -8,8 +8,6 @@ import "styles/views/Game.scss";
 import {Logout} from "../../helpers/common";
 import 'styles/views/Login.scss';
 
-import {StaticDatePickerDemo} from "../../helpers/datePicker";
-
 const FormField = props => {
     return (
         <div className="login field">
@@ -18,7 +16,23 @@ const FormField = props => {
             </label>
             <input
                 className="login input"
-                placeholder="enter here.."
+                placeholder="enter here..."
+                value={props.value}
+                onChange={e => props.onChange(e.target.value)}
+            />
+        </div>
+    );
+};
+
+const FormFieldDate = props => {
+    return (
+        <div className="login field">
+            <label className="login label1">
+                {props.label}
+            </label>
+            <input
+                className="login input"
+                placeholder="DD-MM-YYYY"
                 value={props.value}
                 onChange={e => props.onChange(e.target.value)}
             />
@@ -50,7 +64,7 @@ const UserEdit = props => {
                 // Get the returned user and update the state.
                 setUsername(response.data.username);
                 if (response.data.birthdate != null) {
-                    setBirthdate(new Date(response.data.birthdate));
+                    setBirthdate(response.data.birthdate);
                 }
 
 
@@ -124,16 +138,10 @@ const UserEdit = props => {
                     value={username}
                     onChange={un => setUsername(un)}
                 />
-
-                <legend>
-                    Birthdate
-
-                </legend>
                 <p>
-
                 </p>
-                <FormField
-                    label="come on"
+                <FormFieldDate
+                    label="Birthdate"
                     value={birthdate}
 
                     onChange={d => setBirthdate(d)}
@@ -157,17 +165,6 @@ const UserEdit = props => {
                         Back
                     </Button>
                 </div>
-
-                <div className="game button-container3">
-                    <Button
-                        width="100%"
-                        onClick={() => Logout(history)}
-                    >
-                        Logout
-                    </Button>
-                </div>
-
-
             </div>
 
         </BaseContainer>
