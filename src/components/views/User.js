@@ -21,6 +21,7 @@ const Player = ({user}) => (
 const User = () => {
     const history = useHistory();
     const [user, setUser] = useState(null);
+    const {id} = useParams();
 
     //Gets the user with the path id
     useEffect(() => {
@@ -50,11 +51,11 @@ const User = () => {
 
         fetchData();
         //suggested to delete this array
-    }, []);
+    }, [id]);
 
     let content = <Spinner/>;
 
-    const {id} = useParams();
+
 
     if (user) {
         content = (

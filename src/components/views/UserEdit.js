@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {api, handleError} from 'helpers/api';
-import {Spinner} from 'components/ui/Spinner';
 import {Button} from 'components/ui/Button';
 import {useHistory, useParams} from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
 import "styles/views/Game.scss";
-import {Logout} from "../../helpers/common";
 import 'styles/views/Login.scss';
 
 const FormField = props => {
@@ -52,7 +50,7 @@ const UserEdit = props => {
         async function fetchData() {
             try {
                 console.log('/users/' + id)
-                const response = await api.get('/users/' + id );
+                const response = await api.get('/users/' + id);
 
 
                 // delays continuous execution of an async operation for 1 second.
@@ -86,7 +84,7 @@ const UserEdit = props => {
 
         fetchData();
         //suggested to delete this array
-    }, []);
+    }, [id]);
 
 
     const [username, setUsername] = useState(null);
@@ -124,7 +122,6 @@ const UserEdit = props => {
     };
 
 
-    let content = <Spinner/>;
 
 
     return (

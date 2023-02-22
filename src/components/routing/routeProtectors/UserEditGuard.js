@@ -13,7 +13,7 @@ export const UserEditGuard = props => {
     const {id} = useParams();
     console.log(id)
 
-    if (localStorage.getItem("currentUserId") == id) {
+    if (localStorage.getItem("currentUserId") === id) {
         return props.children;
     }
     return <Redirect to="/game/"/>;
