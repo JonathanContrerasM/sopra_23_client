@@ -30,11 +30,6 @@ const Game = () => {
   // more information can be found under https://reactjs.org/docs/hooks-state.html
   const [users, setUsers] = useState(null);
 
-  const logout = () => {
-    localStorage.removeItem('token');
-    history.push('/login');
-  }
-
   // the effect hook can be used to react to change in your component.
   // in this case, the effect hook is only run once, the first time the component is mounted
   // this can be achieved by leaving the second argument an empty array.
