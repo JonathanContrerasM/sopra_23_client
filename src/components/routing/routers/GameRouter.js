@@ -1,5 +1,9 @@
 import {Redirect, Route} from "react-router-dom";
 import Game from "components/views/Game";
+import User from "components/views/User";
+import UserEdit from "components/views/UserEdit"
+import {UserEditGuard} from "../routeProtectors/UserEditGuard";
+
 import PropTypes from 'prop-types';
 
 const GameRouter = props => {
@@ -14,6 +18,15 @@ const GameRouter = props => {
       <Route exact path={`${props.base}`}>
         <Redirect to={`${props.base}/dashboard`}/>
       </Route>
+      <Route path={`${props.base}/users/:id`} exact>
+        <User/>
+      </Route>
+      <Route path={`${props.base}/users/:id/edit`} exact>
+      <UserEditGuard>
+        <UserEdit/>
+      </UserEditGuard>
+      </Route>
+
     </div>
   );
 };

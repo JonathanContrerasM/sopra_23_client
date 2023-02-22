@@ -6,13 +6,13 @@ import {useHistory} from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 import "styles/views/Game.scss";
+import {Logout} from "../../helpers/common";
 
-const Player = ({user}) => (
-  <div className="player container">
-    <div className="player username">{user.username}</div>
-    <div className="player name">{user.name}</div>
-    <div className="player id">id: {user.id}</div>
-  </div>
+const Player = ({user, history}) => (
+    <div className="player container" onClick={() => history.push("/game/users/" + user.id)}>
+        <div className="player username">{user.username}</div>
+        <div className="player id">id: {user.id}</div>
+    </div>
 );
 
 Player.propTypes = {
@@ -79,12 +79,18 @@ const Game = () => {
       <div className="game">
         <ul className="game user-list">
           {users.map(user => (
-            <Player user={user} key={user.id}/>
-          ))}
+            <Player
+                user={user}
+                key={user.username}
+                history={history}
+                />
+
+          )
+          )}
         </ul>
         <Button
           width="100%"
-          onClick={() => logout()}
+          onClick={() => Logout(history)}
         >
           Logout
         </Button>
@@ -94,7 +100,7 @@ const Game = () => {
 
   return (
     <BaseContainer className="game container">
-      <h2>Happy Coding!</h2>
+      <h2>All Members!</h2>
       <p className="game paragraph">
         Get all users from secure endpoint:
       </p>
