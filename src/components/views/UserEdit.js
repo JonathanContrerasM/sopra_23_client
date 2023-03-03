@@ -86,7 +86,7 @@ const UserEdit = props => {
         //suggested to delete this array
     }, [id]);
 
-
+    const token = localStorage.getItem("token");
     const [username, setUsername] = useState(null);
     const [birthdate, setBirthdate] = useState(null);
     //const [date, setDate] = useState(new Date());
@@ -95,8 +95,7 @@ const UserEdit = props => {
     const doEdit = async () => {
         try {
 
-            console.log('/users/' + id)
-            const requestBody = JSON.stringify({username, birthdate, id});
+            const requestBody = JSON.stringify({username, birthdate, id, token});
 
 
             const response = await api.put('/users/' + id, requestBody);

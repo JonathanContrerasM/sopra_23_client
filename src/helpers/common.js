@@ -6,7 +6,9 @@ export function Logout(history) {
 
     setOffline();
     localStorage.removeItem('token');
-    localStorage.removeItem("currentUserid");
+    localStorage.removeItem("currentUserId");
+    localStorage.removeItem("username");
+
 
     history.push('/login');
 }
