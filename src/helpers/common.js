@@ -14,10 +14,15 @@ export function Logout(history) {
 }
 
 export const setOffline = async () => {
+
+    const token = localStorage.getItem('token');
+
     try {
 
+        const requestBody = JSON.stringify({token});
+
         let currentUserId = localStorage.getItem('currentUserId');
-        const response = await api.put("/setOffline/" + currentUserId);
+        const response = await api.put("/users/offline/" + currentUserId, requestBody);
         console.log(response);
 
     } catch (error) {
