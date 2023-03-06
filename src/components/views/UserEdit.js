@@ -114,9 +114,9 @@ const UserEdit = props => {
 
             history.push("/game/users/" + id);
         } catch (error) {
-            console.error(`Something went wrong while fetching the users: \n${handleError(error)}`);
+            console.error(`Something went wrong while updating the user: \n${handleError(error)}`);
             console.error("Details:", error);
-            alert("Something went wrong while updating the user! See the console for details.");
+            alert(`Something went wrong updating the user: \n${handleError(error)}`);
         }
     };
 
